@@ -104,14 +104,11 @@ static bool8 EscalatorWarpIn_End(struct Task *);
 
 static void Task_UseWaterfall(u8);
 static bool8 WaterfallFieldEffect_Init(struct Task *, struct ObjectEvent *);
-static bool8 WaterfallFieldEffect_ShowMon(struct Task *, struct ObjectEvent *);
-static bool8 WaterfallFieldEffect_WaitForShowMon(struct Task *, struct ObjectEvent *);
 static bool8 WaterfallFieldEffect_RideUp(struct Task *, struct ObjectEvent *);
 static bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *, struct ObjectEvent *);
 
 static void Task_UseDive(u8);
 static bool8 DiveFieldEffect_Init(struct Task *);
-static bool8 DiveFieldEffect_ShowMon(struct Task *);
 static bool8 DiveFieldEffect_TryWarp(struct Task *);
 
 static void Task_LavaridgeGymB1FWarp(u8);
@@ -188,8 +185,6 @@ static void SpriteCB_FieldMoveMonSlideOffscreen(struct Sprite *);
 
 static void Task_SurfFieldEffect(u8);
 static void SurfFieldEffect_Init(struct Task *);
-static void SurfFieldEffect_FieldMovePose(struct Task *);
-static void SurfFieldEffect_ShowMon(struct Task *);
 static void SurfFieldEffect_JumpOnSurfBlob(struct Task *);
 static void SurfFieldEffect_End(struct Task *);
 
@@ -643,8 +638,6 @@ static bool8 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task *) =
 static bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectEvent *) =
 {
     WaterfallFieldEffect_Init,
-    WaterfallFieldEffect_ShowMon,
-    WaterfallFieldEffect_WaitForShowMon,
     WaterfallFieldEffect_RideUp,
     WaterfallFieldEffect_ContinueRideOrEnd,
 };
@@ -652,7 +645,6 @@ static bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectE
 static bool8 (*const sDiveFieldEffectFuncs[])(struct Task *) =
 {
     DiveFieldEffect_Init,
-    DiveFieldEffect_ShowMon,
     DiveFieldEffect_TryWarp,
 };
 
@@ -1886,7 +1878,7 @@ static bool8 WaterfallFieldEffect_ContinueRideOrEnd(struct Task *task, struct Ob
     if (MetatileBehavior_IsWaterfall(objectEvent->currentMetatileBehavior))
     {
         // Still ascending waterfall, back to WaterfallFieldEffect_RideUp
-        task->tState = 3;
+        task->tState = 1;
         return TRUE;
     }
 
@@ -1904,8 +1896,6 @@ bool8 FldEff_UseDive(void)
 {
     u8 taskId;
     taskId = CreateTask(Task_UseDive, 0xff);
-    gTasks[taskId].data[15] = gFieldEffectArguments[0];
-    gTasks[taskId].data[14] = gFieldEffectArguments[1];
     Task_UseDive(taskId);
     return FALSE;
 }
@@ -1921,7 +1911,8 @@ static bool8 DiveFieldEffect_Init(struct Task *task)
     task->data[0]++;
     return FALSE;
 }
-
+/* TODO: make sure this only shows up if it's a mon using the move!
+*/
 static bool8 DiveFieldEffect_ShowMon(struct Task *task)
 {
     LockPlayerFieldControls();
@@ -1936,13 +1927,9 @@ static bool8 DiveFieldEffect_TryWarp(struct Task *task)
     struct MapPosition mapPosition;
     PlayerGetDestCoords(&mapPosition.x, &mapPosition.y);
 
-    // Wait for show mon first
-    if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
-    {
-        TryDoDiveWarp(&mapPosition, gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior);
-        DestroyTask(FindTaskIdByFunc(Task_UseDive));
-        FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
-    }
+    TryDoDiveWarp(&mapPosition, gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior);
+	DestroyTask(FindTaskIdByFunc(Task_UseDive));
+	FieldEffectActiveListRemove(FLDEFF_USE_DIVE);
     return FALSE;
 }
 
@@ -2990,8 +2977,6 @@ u8 FldEff_UseSurf(void)
 
 static void (*const sSurfFieldEffectFuncs[])(struct Task *) = {
     SurfFieldEffect_Init,
-    SurfFieldEffect_FieldMovePose,
-    SurfFieldEffect_ShowMon,
     SurfFieldEffect_JumpOnSurfBlob,
     SurfFieldEffect_End,
 };

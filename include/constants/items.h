@@ -928,7 +928,15 @@
 #define ITEM_RUBY 756
 #define ITEM_SAPPHIRE 757
 
-#define ITEMS_COUNT 758
+// HM Items
+#define ITEM_SURFBOARD 377
+#define ITEM_AXE 378
+#define ITEM_HAMMER 379
+#define ITEM_DIVING_SUIT 380
+#define ITEM_LANTERN 381
+#define ITEM_POWER_GLOVE 382
+
+#define ITEMS_COUNT 764
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
