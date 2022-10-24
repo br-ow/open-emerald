@@ -82,8 +82,9 @@ static void Task_DoFieldMove_Init(u8 taskId)
 	{
 		u8 objEventId;
 
-		ScriptContext2_Enable();
-		gPlayerAvatar.preventStep = TRUE;
+		//LockPlayerFieldControls();
+        LockPlayerFieldControls();
+        gPlayerAvatar.preventStep = TRUE;
 		objEventId = gPlayerAvatar.objectEventId;
 		if (!ObjectEventIsMovementOverridden(&gObjectEvents[objEventId])
 		 || ObjectEventClearHeldMovementIfFinished(&gObjectEvents[objEventId]))

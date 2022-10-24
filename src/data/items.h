@@ -7788,7 +7788,7 @@ const struct Item gItems[] =
     [ITEM_ENIGMA_BERRY_E_READER] =
     {
         .name = _("Enigma Berry"),
-        .itemId = ITEM_ENIGMA_BERRY,
+        .itemId = ITEM_ENIGMA_BERRY_E_READER,
         .price = 20,
         .description = sEnigmaBerryEReaderDesc,
         .pocket = POCKET_BERRIES,

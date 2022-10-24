@@ -1230,8 +1230,8 @@ void ItemUseOutOfBattle_Surfboard(u8 taskId)
 
 static void ItemUseOnFieldCB_Surfboard(u8 taskId)
 {
-	ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_UseSurf);
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseSurf);
     DestroyTask(taskId);
 }
 
@@ -1248,8 +1248,8 @@ void ItemUseOutOfBattle_Axe(u8 taskId)
 
 static void ItemUseOnFieldCB_Axe(u8 taskId)
 {
-	ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_UseCut);
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseCut);
     DestroyTask(taskId);
 }
 
@@ -1266,8 +1266,8 @@ void ItemUseOutOfBattle_Hammer(u8 taskId)
 
 static void ItemUseOnFieldCB_Hammer(u8 taskId)
 {
-	ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_UseRockSmash);
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseRockSmash);
     DestroyTask(taskId);
 }
 
@@ -1289,15 +1289,15 @@ void ItemUseOutOfBattle_DivingSuit(u8 taskId)
 
 static void ItemUseOnFieldCB_DivingSuitAboveWater(u8 taskId)
 {
-	ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_UseDive);
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseDiveSuit);
     DestroyTask(taskId);
 }
 
 static void ItemUseOnFieldCB_DivingSuitUnderwater(u8 taskId)
 {
-	ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_UseDiveUnderwater);
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseDiveSuitUnderwater);
     DestroyTask(taskId);
 }
 
@@ -1314,8 +1314,8 @@ void ItemUseOutOfBattle_Lantern(u8 taskId)
 
 static void ItemUseOnFieldCB_Lantern(u8 taskId)
 {
-	ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_UseFlash);
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseFlashLantern);
     DestroyTask(taskId);
 }
 
@@ -1332,8 +1332,8 @@ void ItemUseOutOfBattle_PowerGlove(u8 taskId)
 
 static void ItemUseOnFieldCB_PowerGlove(u8 taskId)
 {
-	ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_UseStrength);
+	LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UseStrength);
     DestroyTask(taskId);
 }
 
