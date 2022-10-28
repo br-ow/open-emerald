@@ -940,8 +940,8 @@ static void InitSnowflakeSpriteMovement(struct Sprite *sprite)
 
 static void WaitSnowflakeSprite(struct Sprite *sprite)
 {
-    // Timer is never incremented
-    if (gWeatherPtr->snowflakeTimer > 18)
+    // Increment timer
+    if (++gWeatherPtr->snowflakeTimer > 18)
     {
         sprite->invisible = FALSE;
         sprite->callback = UpdateSnowflakeSprite;
@@ -971,6 +971,8 @@ static void UpdateSnowflakeSprite(struct Sprite *sprite)
     else if (x > 242)
         sprite->x = -3 - (gSpriteCoordOffsetX + sprite->centerToCornerVecX);
 
+/* Make snowflakes generate as you walk around (by dummying this out)
+
     y = (sprite->y + sprite->centerToCornerVecY + gSpriteCoordOffsetY) & 0xFF;
     if (y > 163 && y < 171)
     {
@@ -996,6 +998,7 @@ static void UpdateSnowflakeSprite(struct Sprite *sprite)
         sprite->invisible = TRUE;
         sprite->callback = WaitSnowflakeSprite;
     }
+    */
 }
 
 #undef tPosY
