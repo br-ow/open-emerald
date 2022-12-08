@@ -102,11 +102,9 @@ OldaleTown_EventScript_ExplainPokemonMart::
 	setflag FLAG_VISITED_PACIFIDLOG_TOWN
 	setflag FLAG_VISITED_EVER_GRANDE_CITY
 	giveitem ITEM_POTION
-	giveitem ITEM_HM01
 	giveitem ITEM_HM02
 	giveitem ITEM_HM03
 	giveitem ITEM_HM04
-	giveitem ITEM_HM06
 	giveitem ITEM_SURFBOARD
 	giveitem ITEM_AXE
 	giveitem ITEM_HAMMER

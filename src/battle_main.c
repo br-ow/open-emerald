@@ -29,6 +29,7 @@
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
+#include "match_call.h"
 #include "m4a.h"
 #include "palette.h"
 #include "party_menu.h"
@@ -1876,7 +1877,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         }
         //if this is not a gym or rival battle, figure out where to scale our level.
         if (scale == TRUE) {
-            levelMod = (NUM_BADGES - gTrainers[trainerNum].foughtAtBadge)*4;
+            levelMod = (GetNumOwnedBadges() - gTrainers[trainerNum].foughtAtBadge)*4;
         }
 
         for (i = 0; i < monsCount; i++)
