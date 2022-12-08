@@ -9,6 +9,8 @@ EventScript_UseSurf::
 	goto_if_eq VAR_RESULT, NO, EventScript_ReleaseUseSurf
 	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
+	closemessage
+	end
 
 EventScript_UseSurfboard:: @ 8271EA0
 	checkitem ITEM_SURFBOARD, 1
@@ -17,6 +19,8 @@ EventScript_UseSurfboard:: @ 8271EA0
 	lockall
 	msgbox gText_PlayerUsedSurfboard, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
+	closemessage
+	end
 
 EventScript_ReleaseUseSurf::
 	releaseall

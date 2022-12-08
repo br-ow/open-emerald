@@ -1,4 +1,8 @@
 gText_Birch_Welcome::
+	.string "Let's skip this\p."
+	.string "$"
+
+gText_Birch_orig_Welcome::
 	.string "Hi! Sorry to keep you waiting!\p"
 	.string "Welcome to the world of POKéMON!\p"
 	.string "My name is BIRCH.\p"
@@ -12,6 +16,10 @@ gText_Birch_Pokemon::
 	.string "$"
 
 gText_Birch_MainSpeech::
+	.string "Let's skip this\p."
+	.string "$"
+
+gText_Birch_orig_MainSpeech::
 	.string "This world is widely inhabited by\n"
 	.string "creatures known as POKéMON.\p"
 	.string "We humans live alongside POKéMON,\n"

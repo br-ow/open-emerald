@@ -226,16 +226,19 @@ EventScript_UseWaterfall::
 	goto_if_eq VAR_RESULT, NO, EventScript_EndWaterfall
 	msgbox Text_MonUsedWaterfall, MSGBOX_DEFAULT
 	goto EventScript_ClimbWaterfall
+	end
 
 EventScript_UseWaterfallPlayer::
 	lockall
 	goto_if_unset FLAG_WATERFALL, EventScript_CantWaterfall
 	msgbox Text_PlayerUsedWaterfall, MSGBOX_DEFAULT
 	goto EventScript_ClimbWaterfall
+	end
 
 EventScript_ClimbWaterfall::
 	dofieldeffect FLDEFF_USE_WATERFALL
 	goto EventScript_EndWaterfall
+	end
 
 
 EventScript_CannotUseWaterfall::
@@ -304,7 +307,7 @@ EventScript_EndDive::
 EventScript_UseDiveUnderwater::
 	lockall
 	checkpartymove MOVE_DIVE
-	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_CantSurface
+	goto_if_eq VAR_RESULT, PARTY_SIZE, EventScript_UseDiveSuitUnderwater
 	bufferpartymonnick STR_VAR_1, VAR_RESULT
 	setfieldeffectargument 0, VAR_RESULT
 	setfieldeffectargument 1, 1
@@ -317,6 +320,9 @@ EventScript_UseDiveUnderwater::
 	
 EventScript_UseDiveSuitUnderwater:: @ 8290B5A
 	lockall
+	checkitem ITEM_DIVING_SUIT, 1
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_CantDive
 	dofieldeffect FLDEFF_USE_DIVE
 	goto EventScript_EndSurface
 	end	

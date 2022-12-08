@@ -3363,7 +3363,7 @@ static const struct TrainerMonItemCustomMoves sParty_Drake[] = {
     .moves = {MOVE_FLAMETHROWER, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_CRUNCH}
     }
 };
-
+//TODO: gym leader team 8 for rematches
 static const struct TrainerMonItemCustomMoves sParty_Roxanne0[] = {
     {
     .iv = 100,
@@ -12235,8 +12235,8 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne4[] = {
     .moves = {MOVE_DOUBLE_TEAM, MOVE_EXPLOSION, MOVE_PROTECT, MOVE_ROCK_SLIDE}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_Roxanne5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_Roxanne8[] = {
     {
     .iv = 255,
     .lvl = 47,
@@ -12280,7 +12280,7 @@ static const struct TrainerMonItemCustomMoves sParty_Roxanne5[] = {
     .moves = {MOVE_DOUBLE_TEAM, MOVE_EXPLOSION, MOVE_PROTECT, MOVE_ROCK_SLIDE}
     }
 };
-
+/*
 static const struct TrainerMonItemCustomMoves sParty_Brawly2[] = {
     {
     .iv = 255,
@@ -12380,8 +12380,8 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly4[] = {
     .moves = {MOVE_FAKE_OUT, MOVE_FOCUS_PUNCH, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_Brawly5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_Brawly8[] = {
     {
     .iv = 255,
     .lvl = 46,
@@ -12425,7 +12425,7 @@ static const struct TrainerMonItemCustomMoves sParty_Brawly5[] = {
     .moves = {MOVE_FAKE_OUT, MOVE_FOCUS_PUNCH, MOVE_BELLY_DRUM, MOVE_EARTHQUAKE}
     }
 };
-
+/*
 static const struct TrainerMonItemCustomMoves sParty_Wattson2[] = {
     {
     .iv = 255,
@@ -12532,8 +12532,8 @@ static const struct TrainerMonItemCustomMoves sParty_Wattson4[] = {
     .moves = {MOVE_BITE, MOVE_THUNDER_WAVE, MOVE_THUNDER, MOVE_PROTECT}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_Wattson5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_Wattson8[] = {
     {
     .iv = 255,
     .lvl = 50,
@@ -12577,7 +12577,7 @@ static const struct TrainerMonItemCustomMoves sParty_Wattson5[] = {
     .moves = {MOVE_BITE, MOVE_THUNDER_WAVE, MOVE_THUNDER, MOVE_PROTECT}
     }
 };
-
+/*
 static const struct TrainerMonItemCustomMoves sParty_Flannery2[] = {
     {
     .iv = 255,
@@ -12691,8 +12691,8 @@ static const struct TrainerMonItemCustomMoves sParty_Flannery4[] = {
     .moves = {MOVE_OVERHEAT, MOVE_SUNNY_DAY, MOVE_EXPLOSION, MOVE_ATTRACT}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_Flannery5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_Flannery8[] = {
     {
     .iv = 255,
     .lvl = 51,
@@ -12736,7 +12736,7 @@ static const struct TrainerMonItemCustomMoves sParty_Flannery5[] = {
     .moves = {MOVE_OVERHEAT, MOVE_SUNNY_DAY, MOVE_EXPLOSION, MOVE_ATTRACT}
     }
 };
-
+/*
 static const struct TrainerMonItemCustomMoves sParty_Norman2[] = {
     {
     .iv = 255,
@@ -12843,8 +12843,8 @@ static const struct TrainerMonItemCustomMoves sParty_Norman4[] = {
     .moves = {MOVE_HYPER_BEAM, MOVE_FLAMETHROWER, MOVE_THUNDERBOLT, MOVE_SHADOW_BALL}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_Norman5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_Norman8[] = {
     {
     .iv = 255,
     .lvl = 57,
@@ -12888,7 +12888,7 @@ static const struct TrainerMonItemCustomMoves sParty_Norman5[] = {
     .moves = {MOVE_HYPER_BEAM, MOVE_FLAMETHROWER, MOVE_THUNDERBOLT, MOVE_SHADOW_BALL}
     }
 };
-
+/*
 static const struct TrainerMonItemCustomMoves sParty_Winona2[] = {
     {
     .iv = 255,
@@ -13016,8 +13016,8 @@ static const struct TrainerMonItemCustomMoves sParty_Winona4[] = {
     .moves = {MOVE_AERIAL_ACE, MOVE_REST, MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_Winona5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_Winona8[] = {
     {
     .iv = 255,
     .lvl = 53,
@@ -13061,7 +13061,7 @@ static const struct TrainerMonItemCustomMoves sParty_Winona5[] = {
     .moves = {MOVE_SKY_ATTACK, MOVE_REST, MOVE_DRAGON_DANCE, MOVE_EARTHQUAKE}
     }
 };
-
+/*
 static const struct TrainerMonItemCustomMoves sParty_TateAndLiza2[] = {
     {
     .iv = 255,
@@ -13189,8 +13189,8 @@ static const struct TrainerMonItemCustomMoves sParty_TateAndLiza4[] = {
     .moves = {MOVE_SUNNY_DAY, MOVE_SOLAR_BEAM, MOVE_PSYCHIC, MOVE_FLAMETHROWER}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_TateAndLiza5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_TateAndLiza8[] = {
     {
     .iv = 255,
     .lvl = 63,
@@ -13234,7 +13234,7 @@ static const struct TrainerMonItemCustomMoves sParty_TateAndLiza5[] = {
     .moves = {MOVE_SUNNY_DAY, MOVE_SOLAR_BEAM, MOVE_PSYCHIC, MOVE_FLAMETHROWER}
     }
 };
-
+/*
 static const struct TrainerMonItemCustomMoves sParty_Juan2[] = {
     {
     .iv = 255,
@@ -13355,8 +13355,8 @@ static const struct TrainerMonItemCustomMoves sParty_Juan4[] = {
     .moves = {MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_ICE_BEAM, MOVE_REST}
     }
 };
-
-static const struct TrainerMonItemCustomMoves sParty_Juan5[] = {
+*/
+static const struct TrainerMonItemCustomMoves sParty_Juan8[] = {
     {
     .iv = 255,
     .lvl = 61,
@@ -13400,7 +13400,7 @@ static const struct TrainerMonItemCustomMoves sParty_Juan5[] = {
     .moves = {MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_ICE_BEAM, MOVE_REST}
     }
 };
-*/
+
 
 static const struct TrainerMonItemCustomMoves sParty_Angelo[] = {
     {

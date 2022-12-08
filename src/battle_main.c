@@ -57,6 +57,7 @@
 #include "constants/battle_string_ids.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
+#include "constants/level_ranges.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
@@ -1847,6 +1848,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 fixedIV;
     s32 i, j;
     u8 monsCount;
+    u32 levelMod = 0;
+    u32 level = 0;
+    u8 scale = gTrainers[trainerNum].autoScale;
+    u16 species;
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
@@ -1869,6 +1874,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         {
             monsCount = gTrainers[trainerNum].partySize;
         }
+        //if this is not a gym or rival battle, figure out where to scale our level.
+        if (scale == TRUE) {
+            levelMod = (NUM_BADGES - gTrainers[trainerNum].foughtAtBadge)*4;
+        }
 
         for (i = 0; i < monsCount; i++)
         {
@@ -1880,7 +1889,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             else
                 personalityValue = 0x88; // Use personality more likely to result in a male Pokémon
 
-            for (j = 0; gTrainers[trainerNum].trainerName[j] != EOS; j++)
+            for (j = 0; gTrainers[trainerNum].trainerName[j] != EOS; j++) 
                 nameHash += gTrainers[trainerNum].trainerName[j];
 
             switch (gTrainers[trainerNum].partyFlags)
@@ -1889,24 +1898,54 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
+                level = partyData[i].lvl;
+                species = partyData[i].species;
+
+                //Level & species scaling
+                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                    level += levelMod;
+                    if (level < 2) {
+                        level = 3;
+                    }
+                    if (level > 100) {
+                        level = 100;
+                    }
+                    species = GetEvolutionSpeciesGivenLevel(species, level);
+                }
+                for (j = 0; gSpeciesNames[species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+
+                CreateMon(&party[i], species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
+                level = partyData[i].lvl;
+                species = partyData[i].species;
+
+                //Level & species scaling
+                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                    level += levelMod;
+                    if (level < 2) {
+                        level = 3;
+                    }
+                    if (level > 100) {
+                        level = 100;
+                    }
+                    species = GetEvolutionSpeciesGivenLevel(species, level);
+                }
+
+                for (j = 0; gSpeciesNames[species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                CreateMon(&party[i], species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
@@ -1919,12 +1958,27 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
+                level = partyData[i].lvl;
+                species = partyData[i].species;
+
+                //Level & species scaling
+                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                    level += levelMod;
+                    if (level < 2) {
+                        level = 3;
+                    }
+                    if (level > 100) {
+                        level = 100;
+                    }
+                    species = GetEvolutionSpeciesGivenLevel(species, level);
+                }
+
+                for (j = 0; gSpeciesNames[species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                CreateMon(&party[i], species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -1933,12 +1987,27 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
 
-                for (j = 0; gSpeciesNames[partyData[i].species][j] != EOS; j++)
-                    nameHash += gSpeciesNames[partyData[i].species][j];
+                level = partyData[i].lvl;
+                species = partyData[i].species;
+
+                //Level & species scaling
+                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                    level += levelMod;
+                    if (level < 2) {
+                        level = 3;
+                    }
+                    if (level > 100) {
+                        level = 100;
+                    }
+                    species = GetEvolutionSpeciesGivenLevel(species, level);
+                }
+
+                for (j = 0; gSpeciesNames[species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[species][j];
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                CreateMon(&party[i], partyData[i].species, partyData[i].lvl, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                CreateMon(&party[i], species, level, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
@@ -1949,6 +2018,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 }
                 break;
             }
+
             }
         }
 

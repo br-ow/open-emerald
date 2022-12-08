@@ -514,12 +514,12 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 /* TODO: check that each of these scripts works with both HM's and the items */
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
-    if (/*FlagGet(FLAG_BADGE05_GET) == TRUE && */ (PartyHasMonWithSurf() == TRUE) && IsPlayerFacingSurfableFishableWater() == TRUE)
+    if (/*FlagGet(FLAG_BADGE05_GET) == TRUE &&*/ (PartyHasMonWithSurf() == TRUE) &&  IsPlayerFacingSurfableFishableWater() == TRUE)
         return EventScript_UseSurf;
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {
-        if (FlagGet(FLAG_WATERFALL) == TRUE && IsPlayerSurfingNorth() == TRUE)
+        if (IsPlayerSurfingNorth() == TRUE)
             return EventScript_UseWaterfall;
         else
             return EventScript_CannotUseWaterfall;

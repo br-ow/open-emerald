@@ -7724,13 +7724,13 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
 }
 
 static bool32 IsMonEventLegal(u8 battlerId)
-{
-    if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+{ // Only for mew and deoxys; commenting out ensures that they'll be legal.
+    /* if (GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
         return TRUE;
     if (GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_DEOXYS
         && GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_SPECIES, NULL) != SPECIES_MEW)
-            return TRUE;
-    return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_EVENT_LEGAL, NULL);
+    */        return TRUE;
+    //return GetMonData(&gPlayerParty[gBattlerPartyIndexes[battlerId]], MON_DATA_EVENT_LEGAL, NULL);
 }
 
 u8 IsMonDisobedient(void)

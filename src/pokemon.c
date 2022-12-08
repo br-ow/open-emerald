@@ -11,6 +11,7 @@
 #include "battle_tower.h"
 #include "battle_z_move.h"
 #include "data.h"
+#include "daycare.h"
 #include "event_data.h"
 #include "evolution_scene.h"
 #include "field_specials.h"
@@ -68,6 +69,7 @@ static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
 static void RemoveIVIndexFromList(u8 *ivs, u8 selectedIv);
 void TrySpecialOverworldEvo();
+u16 getMaxEvo(u8 level, u16 species, u16 stage);
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
 EWRAM_DATA u8 gPlayerPartyCount = 0;
@@ -6714,6 +6716,189 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
 
     return targetSpecies;
 }
+
+// Find appropriate 'mon given a particular level and species; for scaling trainer battles
+
+
+u16 GetEvolutionSpeciesGivenLevel(u16 species, u8 level)
+{
+    u16 targetSpecies = 0;
+    //start at the bottom of the chain
+    u16 egg_species = GetEggSpecies(species);
+    targetSpecies = getMaxEvo(level, egg_species, 1);
+
+    return targetSpecies;
+}
+
+//proceeds down the evolution "tree" and returns the highest species that qualifies.
+u16 getMaxEvo(u8 level, u16 species, u16 stage) {
+    int i, j;
+    u16 targetSpecies = 0;
+    u16 currentMap;
+
+    for (i = 0; i < EVOS_PER_MON; i++)
+    {
+        switch (gEvolutionTable[species][i].method)
+        {
+        case EVO_MEGA_EVOLUTION: //mega-evo doesn't count
+            break;
+        case EVO_FRIENDSHIP_DAY:
+        case EVO_FRIENDSHIP_NIGHT:
+        case EVO_FRIENDSHIP:
+            if (stage == 1 && level >= 15)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            else if (stage == 2 && level >= 28)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_ITEM_HOLD_NIGHT: //sneasel, gligar
+            if ( level >= 30)
+            {
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            }
+            break;
+        case EVO_ITEM_HOLD_DAY:
+            if ( level >= 15) //only happiny right now
+            {
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            }
+            break;
+        case EVO_LEVEL_DAY:
+        case EVO_LEVEL_NIGHT:
+        case EVO_LEVEL_DUSK:
+        case EVO_LEVEL_RAIN:
+        case EVO_LEVEL:
+            if (gEvolutionTable[species][i].param <= level)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_FEMALE:
+            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_MALE:
+            targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_ATK_GT_DEF:
+            if (gEvolutionTable[species][i].param <= level)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_ATK_EQ_DEF:
+            if (gEvolutionTable[species][i].param <= level)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_ATK_LT_DEF:
+            if (gEvolutionTable[species][i].param <= level)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_SILCOON:
+            if (gEvolutionTable[species][i].param <= level)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_CASCOON:
+            if (gEvolutionTable[species][i].param <= level)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_NINJASK:
+            if (gEvolutionTable[species][i].param <= level)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_BEAUTY:
+            if (level >= 25) //Feebas; a little later than magikarp
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_MOVE:
+            if (level >= 40)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_MOVE_TYPE: //sylveon
+            for (j = 0; j < 4; j++)
+            {
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            }
+            break;
+        case EVO_SPECIFIC_MON_IN_PARTY:
+            if (level >= 20) //mantyke
+            {
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            }
+            break;
+        case EVO_LEVEL_DARK_TYPE_MON_IN_PARTY:
+            if (gEvolutionTable[species][i].param <= level)
+            {
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            }
+            break;
+        case EVO_MAPSEC:
+            if (gMapHeader.regionMapSectionId == gEvolutionTable[species][i].param || level >= 40)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_SPECIFIC_MAP:
+            currentMap = ((gSaveBlock1Ptr->location.mapGroup) << 8 | gSaveBlock1Ptr->location.mapNum);
+            if (currentMap == gEvolutionTable[species][i].param)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+        case EVO_LEVEL_NATURE_AMPED:
+        case EVO_LEVEL_NATURE_LOW_KEY:
+            if (gEvolutionTable[species][i].param <= level)
+            {
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+                }
+            //TRADE EVOS
+            case EVO_TRADE_ITEM:
+            case EVO_TRADE_SPECIFIC_MON:
+            case EVO_TRADE:
+            if (stage == 1 && level >= 20)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            else if (stage == 2 && level >= 35)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+            case EVO_ITEM:
+            if (stage == 1 && level >= 25)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            else if (stage == 2 && level >= 35)
+                targetSpecies = gEvolutionTable[species][i].targetSpecies;
+            break;
+            case EVO_ITEM_FEMALE:
+                if (stage == 1 && level >= 25)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                else if (stage == 2 && level >= 35)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_ITEM_MALE:
+                if (stage == 1 && level >= 25)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                else if (stage == 2 && level >= 35)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_CRITICAL_HITS: //sirfetch'd
+                if (level >= 25)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_SCRIPT_TRIGGER_DMG:
+            {
+                if (level >= 25)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            }
+            //TODO: come up with levels for these
+            case EVO_DARK_SCROLL:
+                if (level >= 25)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_WATER_SCROLL:
+                if (level >= 25)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+        }
+    }
+
+    if (targetSpecies == 0) { //no evolution possible
+        return species; //just use this one
+    }
+    else {
+        return getMaxEvo(level, targetSpecies, stage + 1);
+    }
+}
+
 
 u16 HoennPokedexNumToSpecies(u16 hoennNum)
 {
