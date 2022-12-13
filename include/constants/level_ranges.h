@@ -1,5 +1,5 @@
-#ifndef LEVEL_RANGES_H
-#define LEVEL_RANGES_H
+#ifndef GUARD_LEVEL_RANGES_H
+#define GUARD_LEVEL_RANGES_H
 /*
 const int BADGE_LEVEL_DIFS[] = {
     5, //0 -> 1, lower version would be 3
@@ -25,16 +25,4 @@ const int BADGE_LEVEL_DIFS[] = {
 #define HAVE_7_BADGES 7
 #define HAVE_8_BADGES 8
 
-const int BADGE_LEVEL_RANGE[][2] = {
-    {3, 10}, //0
-    {8, 13}, //1
-    {11, 18}, //2
-    {17, 24}, //3
-    {21, 26}, //4
-    {25, 30}, //5
-    {27, 37}, //6
-    {28, 43}, //7
-    {40, 100}, //8
-};
-
-#endif // LEVEL_RANGES_H
+#endif // GUARD_LEVEL_RANGES_H
