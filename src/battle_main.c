@@ -1853,6 +1853,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u32 level = 0;
     u8 scale = gTrainers[trainerNum].autoScale;
     u16 species;
+    int badges = GetNumOwnedBadges();
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
@@ -1903,7 +1904,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 species = partyData[i].species;
 
                 //Level & species scaling
-                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
                     level += levelMod;
                     if (level < 2) {
                         level = 3;
@@ -1930,7 +1931,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 species = partyData[i].species;
 
                 //Level & species scaling
-                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
                     level += levelMod;
                     if (level < 2) {
                         level = 3;
@@ -1963,7 +1964,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 species = partyData[i].species;
 
                 //Level & species scaling
-                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
                     level += levelMod;
                     if (level < 2) {
                         level = 3;
@@ -1992,7 +1993,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 species = partyData[i].species;
 
                 //Level & species scaling
-                if (scale == TRUE && NUM_BADGES != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_START] || level > BADGE_LEVEL_RANGE[NUM_BADGES][RANGE_END])) {
+                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
                     level += levelMod;
                     if (level < 2) {
                         level = 3;

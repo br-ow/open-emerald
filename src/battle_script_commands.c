@@ -22,6 +22,7 @@
 #include "reshow_battle_screen.h"
 #include "main.h"
 #include "palette.h"
+#include "match_call.h"
 #include "money.h"
 #include "bg.h"
 #include "string_util.h"
@@ -52,6 +53,7 @@
 #include "constants/battle_string_ids.h"
 #include "constants/hold_effects.h"
 #include "constants/items.h"
+#include "constants/level_ranges.h"
 #include "constants/map_types.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -6936,6 +6938,9 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     u32 i = 0;
     u32 lastMonLevel = 0;
     u32 moneyReward;
+    u32 levelMod = 0;
+    u8 scale = gTrainers[trainerId].autoScale;
+    int badges = GetNumOwnedBadges();
 
     if (trainerId == TRAINER_SECRET_BASE)
     {
@@ -6970,6 +6975,20 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
             }
             break;
         }
+        //Scale money to level
+        if (scale == TRUE) {
+            levelMod = (badges - gTrainers[trainerId].foughtAtBadge)*4;
+            if (badges != gTrainers[trainerId].foughtAtBadge && (lastMonLevel < BADGE_LEVEL_RANGE[badges][RANGE_START] || lastMonLevel > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
+                lastMonLevel += levelMod;
+                if (lastMonLevel < 2) {
+                    lastMonLevel = 3;
+                }
+                if (lastMonLevel > 100) {
+                    lastMonLevel = 100;
+                }
+                }
+        }
+
 
         for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
         {
