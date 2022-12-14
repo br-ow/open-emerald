@@ -6976,19 +6976,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
             break;
         }
         //Scale money to level
-        if (scale == TRUE) {
-            levelMod = (badges - gTrainers[trainerId].foughtAtBadge)*4;
-            if (badges != gTrainers[trainerId].foughtAtBadge && (lastMonLevel < BADGE_LEVEL_RANGE[badges][RANGE_START] || lastMonLevel > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
-                lastMonLevel += levelMod;
-                if (lastMonLevel < 2) {
-                    lastMonLevel = 3;
-                }
-                if (lastMonLevel > 100) {
-                    lastMonLevel = 100;
-                }
-                }
-        }
-
+        lastMonLevel = scaleLevel(scale, lastMonLevel, badges, gTrainers[trainerId].foughtAtBadge);
 
         for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
         {

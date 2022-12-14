@@ -66,6 +66,7 @@ bool8 TryRunFromBattle(u8 battlerId);
 void SpecialStatusesClear(void);
 void SetTypeBeforeUsingMove(u16 move, u8 battlerAtk);
 bool32 IsWildMonSmart(void);
+u32 scaleLevel(u8 scale, u32 level, int badges, u32 foughtAtBadge);
 
 extern struct MultiPartnerMenuPokemon gMultiPartnerParty[MULTI_PARTY_SIZE];
 

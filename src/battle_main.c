@@ -78,6 +78,8 @@ static void CB2_HandleStartMultiPartnerBattle(void);
 static void CB2_HandleStartMultiBattle(void);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
+u32 scaleLevel(u8 scale, u32 level, int badges, u32 foughtAtBadge);
+static u16 scaleSpecies(u8 scale, u16 species, u32 newLevel, u32 oldLevel);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
 static void BattleMainCB1(void);
 static void CB2_EndLinkBattle(void);
@@ -1842,6 +1844,31 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
     }
 }
 
+u32 scaleLevel(u8 scale, u32 level, int badges, u32 foughtAtBadge)
+{
+    u32 levelMod = 0;
+    u32 newLevel = level;
+    if (scale == TRUE && badges != foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
+        levelMod = (GetNumOwnedBadges() - foughtAtBadge)*4;
+        newLevel += levelMod;
+        if (newLevel < 2) {
+            newLevel = 3;
+        }
+        if (newLevel > 100) {
+            newLevel = 100;
+        }
+    }
+    return newLevel;
+}
+
+static u16 scaleSpecies(u8 scale, u16 species, u32 newLevel, u32 oldLevel) {
+    u16 newSpecies = species;
+    if (scale == TRUE && newLevel != oldLevel) {
+        newSpecies = GetEvolutionSpeciesGivenLevel(species, newLevel);
+    }
+    return newSpecies;
+}
+
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
     u32 nameHash = 0;
@@ -1876,10 +1903,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         {
             monsCount = gTrainers[trainerNum].partySize;
         }
-        //if this is not a gym or rival battle, figure out where to scale our level.
-        if (scale == TRUE) {
-            levelMod = (GetNumOwnedBadges() - gTrainers[trainerNum].foughtAtBadge)*4;
-        }
 
         for (i = 0; i < monsCount; i++)
         {
@@ -1900,20 +1923,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonNoItemDefaultMoves *partyData = gTrainers[trainerNum].party.NoItemDefaultMoves;
 
-                level = partyData[i].lvl;
-                species = partyData[i].species;
+                level = scaleLevel(scale, partyData[i].lvl, badges, gTrainers[trainerNum].foughtAtBadge);
+                species = scaleSpecies(scale, partyData[i].species, level, partyData[i].lvl);
 
-                //Level & species scaling
-                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
-                    level += levelMod;
-                    if (level < 2) {
-                        level = 3;
-                    }
-                    if (level > 100) {
-                        level = 100;
-                    }
-                    species = GetEvolutionSpeciesGivenLevel(species, level);
-                }
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
 
@@ -1926,21 +1938,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             case F_TRAINER_PARTY_CUSTOM_MOVESET:
             {
                 const struct TrainerMonNoItemCustomMoves *partyData = gTrainers[trainerNum].party.NoItemCustomMoves;
-
-                level = partyData[i].lvl;
-                species = partyData[i].species;
-
-                //Level & species scaling
-                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
-                    level += levelMod;
-                    if (level < 2) {
-                        level = 3;
-                    }
-                    if (level > 100) {
-                        level = 100;
-                    }
-                    species = GetEvolutionSpeciesGivenLevel(species, level);
-                }
+                
+                level = scaleLevel(scale, partyData[i].lvl, badges, gTrainers[trainerNum].foughtAtBadge);
+                species = scaleSpecies(scale, partyData[i].species, level, partyData[i].lvl);
 
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
@@ -1960,20 +1960,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonItemDefaultMoves *partyData = gTrainers[trainerNum].party.ItemDefaultMoves;
 
-                level = partyData[i].lvl;
-                species = partyData[i].species;
-
-                //Level & species scaling
-                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
-                    level += levelMod;
-                    if (level < 2) {
-                        level = 3;
-                    }
-                    if (level > 100) {
-                        level = 100;
-                    }
-                    species = GetEvolutionSpeciesGivenLevel(species, level);
-                }
+                level = scaleLevel(scale, partyData[i].lvl, badges, gTrainers[trainerNum].foughtAtBadge);
+                species = scaleSpecies(scale, partyData[i].species, level, partyData[i].lvl);
 
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
@@ -1989,20 +1977,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {
                 const struct TrainerMonItemCustomMoves *partyData = gTrainers[trainerNum].party.ItemCustomMoves;
 
-                level = partyData[i].lvl;
-                species = partyData[i].species;
-
-                //Level & species scaling
-                if (scale == TRUE && badges != gTrainers[trainerNum].foughtAtBadge && (level < BADGE_LEVEL_RANGE[badges][RANGE_START] || level > BADGE_LEVEL_RANGE[badges][RANGE_END])) {
-                    level += levelMod;
-                    if (level < 2) {
-                        level = 3;
-                    }
-                    if (level > 100) {
-                        level = 100;
-                    }
-                    species = GetEvolutionSpeciesGivenLevel(species, level);
-                }
+                level = scaleLevel(scale, partyData[i].lvl, badges, gTrainers[trainerNum].foughtAtBadge);
+                species = scaleSpecies(scale, partyData[i].species, level, partyData[i].lvl);
 
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
