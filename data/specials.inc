@@ -536,3 +536,11 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SetTotemBoost
 	def_special TrySpecialOverworldEvo
+	def_special GetRoxanneId
+	def_special GetBrawlyId
+	def_special GetWattsonId
+	def_special GetFlanneryId
+	def_special GetNormanId
+	def_special GetWinonaId
+	def_special GetTateAndLizaId
+	def_special GetJuanId

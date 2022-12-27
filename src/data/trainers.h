@@ -3787,15 +3787,12 @@ const struct Trainer gTrainers[] = {
         .trainerPic = TRAINER_PIC_LEADER_ROXANNE,
         .trainerName = _("ROXANNE"),
         .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE},
-        .doubleBattle = TRUE,
+        .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
         .party = ITEM_CUSTOM_MOVES(sParty_Roxanne8),
         .autoScale = FALSE,
         .foughtAtBadge = 8,
     },
-//TODO: add "foughtAtBadge" to each trainer
-// currently on badge 5 mel and paul
-// skipped sheila, badge 4
     [TRAINER_BRAWLY_0] =
     {
         .trainerClass = TRAINER_CLASS_LEADER,

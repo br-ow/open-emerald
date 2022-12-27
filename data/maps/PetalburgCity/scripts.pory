@@ -14,6 +14,7 @@ PetalburgCity_OnTransition:
 	setflag FLAG_VISITED_PETALBURG_CITY
 	call_if_eq VAR_PETALBURG_CITY_STATE, 0, PetalburgCity_EventScript_MoveGymBoyToWestEntrance
 	call_if_eq VAR_PETALBURG_CITY_STATE, 2, PetalburgCity_EventScript_DisableMapNameAndMusic
+	goto_if_eq VAR_PETALBURG_CITY_STATE, 3, PetalburgCity_EventScript_CheckCanDoGym
 	call_if_eq VAR_PETALBURG_CITY_STATE, 4, PetalburgCity_EventScript_DisableMapNameAndMusic
 	call_if_eq VAR_PETALBURG_GYM_STATE, 8, PetalburgCity_EventScript_SetGymDoorsUnlocked
 	end
@@ -29,6 +30,15 @@ PetalburgCity_EventScript_DisableMapNameAndMusic::
 
 PetalburgCity_EventScript_SetGymDoorsUnlocked::
 	setvar VAR_PETALBURG_GYM_STATE, 7
+	return
+
+PetalburgCity_EventScript_CheckCanDoGym::
+	goto_if_unset FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_EventScript_CanDoGym
+	return
+
+PetalburgCity_EventScript_CanDoGym::
+	setvar VAR_PETALBURG_GYM_STATE, 6
+	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	return
 
 PetalburgCity_OnFrame:

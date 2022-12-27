@@ -1861,14 +1861,16 @@ static const u16 sBadgeFlags[NUM_BADGES] =
 int GetNumOwnedBadges(void)
 {
     u32 i;
+    u32 b = 0;
 
     for (i = 0; i < NUM_BADGES; i++)
     {
-        if (!FlagGet(sBadgeFlags[i]))
-            break;
+        if (FlagGet(sBadgeFlags[i])) {
+            b++;
+        }
     }
 
-    return i;
+    return b;
 }
 
 // Whether or not a trainer calling the player from a different route should request a battle

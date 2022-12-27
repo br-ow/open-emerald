@@ -7,6 +7,7 @@
 #include "safari_zone.h"
 #include "script.h"
 #include "event_data.h"
+#include "match_call.h"
 #include "metatile_behavior.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
@@ -88,6 +89,7 @@ static void RegisterTrainerInMatchCall(void);
 static void HandleRematchVarsOnBattleEnd(void);
 static const u8 *GetIntroSpeechOfApproachingTrainer(void);
 static const u8 *GetTrainerCantBattleSpeech(void);
+static u16 CheckSpecialCaseRematch(u16 trainerId);
 
 EWRAM_DATA static u16 sTrainerBattleMode = 0;
 EWRAM_DATA u16 gTrainerBattleOpponent_A = 0;
@@ -989,7 +991,7 @@ static u32 TrainerBattleLoadArg32(const u8 *ptr)
 
 static u16 TrainerBattleLoadArg16(const u8 *ptr)
 {
-    return T1_READ_16(ptr);
+    return VarGet(T1_READ_16(ptr));
 }
 
 static u8 TrainerBattleLoadArg8(const u8 *ptr)
@@ -1718,12 +1720,12 @@ static u16 GetRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 
     for (i = 1; i < REMATCHES_COUNT; i++)
     {
         if (trainerEntry->trainerIds[i] == 0) // previous entry was this trainer's last one
-            return trainerEntry->trainerIds[i - 1];
+            return CheckSpecialCaseRematch(trainerEntry->trainerIds[i - 1]);
         if (!HasTrainerBeenFought(trainerEntry->trainerIds[i]))
-            return trainerEntry->trainerIds[i];
+            return CheckSpecialCaseRematch(trainerEntry->trainerIds[i]);
     }
 
-    return trainerEntry->trainerIds[REMATCHES_COUNT - 1]; // already beaten at max stage
+    return CheckSpecialCaseRematch(trainerEntry->trainerIds[REMATCHES_COUNT - 1]); // already beaten at max stage
 }
 
 static u16 GetLastBeatenRematchTrainerIdFromTable(const struct RematchTrainer *table, u16 firstBattleTrainerId)
@@ -1903,4 +1905,365 @@ u16 CountBattledRematchTeams(u16 trainerId)
     }
 
     return i;
+}
+
+static u16 CheckSpecialCaseRematch(u16 trainerId) {
+    u16 retId = trainerId;
+    switch (trainerId)
+    {
+    case TRAINER_ROXANNE_0:
+    case TRAINER_ROXANNE_1:
+    case TRAINER_ROXANNE_2:
+    case TRAINER_ROXANNE_3:
+    case TRAINER_ROXANNE_4:
+    case TRAINER_ROXANNE_5:
+        retId = GetRoxanneId();
+        break;
+    case TRAINER_BRAWLY_0:
+    case TRAINER_BRAWLY_1:
+    case TRAINER_BRAWLY_2:
+    case TRAINER_BRAWLY_3:
+    case TRAINER_BRAWLY_4:
+    case TRAINER_BRAWLY_5:
+        retId = GetBrawlyId();
+        break;
+    case TRAINER_WATTSON_0:
+    case TRAINER_WATTSON_1:
+    case TRAINER_WATTSON_2:
+    case TRAINER_WATTSON_3:
+    case TRAINER_WATTSON_4:
+    case TRAINER_WATTSON_5:
+        retId = GetWattsonId();
+        break;
+    case TRAINER_FLANNERY_0:
+    case TRAINER_FLANNERY_1:
+    case TRAINER_FLANNERY_2:
+    case TRAINER_FLANNERY_3:
+    case TRAINER_FLANNERY_4:
+    case TRAINER_FLANNERY_5:
+        retId = GetFlanneryId();
+        break;
+    case TRAINER_NORMAN_0:
+    case TRAINER_NORMAN_1:
+    case TRAINER_NORMAN_2:
+    case TRAINER_NORMAN_3:
+    case TRAINER_NORMAN_4:
+    case TRAINER_NORMAN_5:
+        retId = GetNormanId();
+        break;
+    case TRAINER_WINONA_0:
+    case TRAINER_WINONA_1:
+    case TRAINER_WINONA_2:
+    case TRAINER_WINONA_3:
+    case TRAINER_WINONA_4:
+    case TRAINER_WINONA_5:
+        retId = GetWinonaId();
+        break;
+    case TRAINER_TATE_AND_LIZA_0:
+    case TRAINER_TATE_AND_LIZA_1:
+    case TRAINER_TATE_AND_LIZA_2:
+    case TRAINER_TATE_AND_LIZA_3:
+    case TRAINER_TATE_AND_LIZA_4:
+    case TRAINER_TATE_AND_LIZA_5:
+        retId = GetTateAndLizaId();
+        break;
+    case TRAINER_JUAN_0:
+    case TRAINER_JUAN_1:
+    case TRAINER_JUAN_2:
+    case TRAINER_JUAN_3:
+    case TRAINER_JUAN_4:
+    case TRAINER_JUAN_5:
+        retId = GetJuanId();
+        break;
+    default:
+        break;
+    }
+}
+
+u16 GetRoxanneId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_ROXANNE_0;
+        break;
+    case 1:
+        id = TRAINER_ROXANNE_1;
+        break;
+    case 2:
+        id = TRAINER_ROXANNE_2;
+        break;
+    case 3:
+        id = TRAINER_ROXANNE_3;
+        break;
+    case 4:
+        id = TRAINER_ROXANNE_4;
+        break;
+    case 5:
+        id = TRAINER_ROXANNE_5;
+        break;
+    case 6:
+        id = TRAINER_ROXANNE_6;
+        break;
+    case 7:
+        id = TRAINER_ROXANNE_7;
+        break;
+    default:
+        id = TRAINER_ROXANNE_8;
+        break;
+    }
+    return id;
+}
+
+u16 GetBrawlyId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_BRAWLY_0;
+        break;
+    case 1:
+        id = TRAINER_BRAWLY_1;
+        break;
+    case 2:
+        id = TRAINER_BRAWLY_2;
+        break;
+    case 3:
+        id = TRAINER_BRAWLY_3;
+        break;
+    case 4:
+        id = TRAINER_BRAWLY_4;
+        break;
+    case 5:
+        id = TRAINER_BRAWLY_5;
+        break;
+    case 6:
+        id = TRAINER_BRAWLY_6;
+        break;
+    case 7:
+        id = TRAINER_BRAWLY_7;
+        break;
+    default:
+        id = TRAINER_BRAWLY_8;
+        break;
+    }
+    return id;
+}
+
+u16 GetWattsonId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_WATTSON_0;
+        break;
+    case 1:
+        id = TRAINER_WATTSON_1;
+        break;
+    case 2:
+        id = TRAINER_WATTSON_2;
+        break;
+    case 3:
+        id = TRAINER_WATTSON_3;
+        break;
+    case 4:
+        id = TRAINER_WATTSON_4;
+        break;
+    case 5:
+        id = TRAINER_WATTSON_5;
+        break;
+    case 6:
+        id = TRAINER_WATTSON_6;
+        break;
+    case 7:
+        id = TRAINER_WATTSON_7;
+        break;
+    default:
+        id = TRAINER_WATTSON_8;
+        break;
+    }
+    return id;
+}
+
+u16 GetFlanneryId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_FLANNERY_0;
+        break;
+    case 1:
+        id = TRAINER_FLANNERY_1;
+        break;
+    case 2:
+        id = TRAINER_FLANNERY_2;
+        break;
+    case 3:
+        id = TRAINER_FLANNERY_3;
+        break;
+    case 4:
+        id = TRAINER_FLANNERY_4;
+        break;
+    case 5:
+        id = TRAINER_FLANNERY_5;
+        break;
+    case 6:
+        id = TRAINER_FLANNERY_6;
+        break;
+    case 7:
+        id = TRAINER_FLANNERY_7;
+        break;
+    default:
+        id = TRAINER_FLANNERY_8;
+        break;
+    }
+    return id;
+}
+
+u16 GetNormanId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_NORMAN_0;
+        break;
+    case 1:
+        id = TRAINER_NORMAN_1;
+        break;
+    case 2:
+        id = TRAINER_NORMAN_2;
+        break;
+    case 3:
+        id = TRAINER_NORMAN_3;
+        break;
+    case 4:
+        id = TRAINER_NORMAN_4;
+        break;
+    case 5:
+        id = TRAINER_NORMAN_5;
+        break;
+    case 6:
+        id = TRAINER_NORMAN_6;
+        break;
+    case 7:
+        id = TRAINER_NORMAN_7;
+        break;
+    default:
+        id = TRAINER_NORMAN_8;
+        break;
+    }
+    return id;
+}
+
+u16 GetWinonaId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_WINONA_0;
+        break;
+    case 1:
+        id = TRAINER_WINONA_1;
+        break;
+    case 2:
+        id = TRAINER_WINONA_2;
+        break;
+    case 3:
+        id = TRAINER_WINONA_3;
+        break;
+    case 4:
+        id = TRAINER_WINONA_4;
+        break;
+    case 5:
+        id = TRAINER_WINONA_5;
+        break;
+    case 6:
+        id = TRAINER_WINONA_6;
+        break;
+    case 7:
+        id = TRAINER_WINONA_7;
+        break;
+    default:
+        id = TRAINER_WINONA_8;
+        break;
+    }
+    return id;
+}
+
+u16 GetTateAndLizaId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_TATE_AND_LIZA_0;
+        break;
+    case 1:
+        id = TRAINER_TATE_AND_LIZA_1;
+        break;
+    case 2:
+        id = TRAINER_TATE_AND_LIZA_2;
+        break;
+    case 3:
+        id = TRAINER_TATE_AND_LIZA_3;
+        break;
+    case 4:
+        id = TRAINER_TATE_AND_LIZA_4;
+        break;
+    case 5:
+        id = TRAINER_TATE_AND_LIZA_5;
+        break;
+    case 6:
+        id = TRAINER_TATE_AND_LIZA_6;
+        break;
+    case 7:
+        id = TRAINER_TATE_AND_LIZA_7;
+        break;
+    default:
+        id = TRAINER_TATE_AND_LIZA_8;
+        break;
+    }
+    return id;
+}
+
+u16 GetJuanId(void) {
+    u16 id = 0;
+    int badges = GetNumOwnedBadges();
+    switch (badges)
+    {
+    case 0:
+        id = TRAINER_JUAN_0;
+        break;
+    case 1:
+        id = TRAINER_JUAN_1;
+        break;
+    case 2:
+        id = TRAINER_JUAN_2;
+        break;
+    case 3:
+        id = TRAINER_JUAN_3;
+        break;
+    case 4:
+        id = TRAINER_JUAN_4;
+        break;
+    case 5:
+        id = TRAINER_JUAN_5;
+        break;
+    case 6:
+        id = TRAINER_JUAN_6;
+        break;
+    case 7:
+        id = TRAINER_JUAN_7;
+        break;
+    default:
+        id = TRAINER_JUAN_8;
+        break;
+    }
+    return id;
 }

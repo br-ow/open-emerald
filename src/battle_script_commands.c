@@ -6940,7 +6940,6 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     u32 moneyReward;
     u32 levelMod = 0;
     u8 scale = gTrainers[trainerId].autoScale;
-    int badges = GetNumOwnedBadges();
 
     if (trainerId == TRAINER_SECRET_BASE)
     {
@@ -6976,7 +6975,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
             break;
         }
         //Scale money to level
-        lastMonLevel = scaleLevel(scale, lastMonLevel, badges, gTrainers[trainerId].foughtAtBadge);
+        lastMonLevel = scaleLevel(scale, lastMonLevel, GetNumOwnedBadges(), gTrainers[trainerId].foughtAtBadge);
 
         for (; gTrainerMoneyTable[i].classId != 0xFF; i++)
         {

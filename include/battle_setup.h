@@ -67,5 +67,13 @@ bool8 ShouldTryRematchBattle(void);
 bool8 IsTrainerReadyForRematch(void);
 void ShouldTryGetTrainerScript(void);
 u16 CountBattledRematchTeams(u16 trainerId);
+u16 GetRoxanneId(void);
+u16 GetBrawlyId(void);
+u16 GetWattsonId(void);
+u16 GetFlanneryId(void);
+u16 GetNormanId(void);
+u16 GetWinonaId(void);
+u16 GetTateAndLizaId(void);
+u16 GetJuanId(void);
 
 #endif // GUARD_BATTLE_SETUP_H
