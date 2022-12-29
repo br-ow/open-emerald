@@ -20,7 +20,84 @@ Route101_EventScript_HideMapNamePopup::
 	setvar VAR_ROUTE101_STATE, 1
 	end
 
-Route101_EventScript_StartBirchRescue::
+Route101_EventScript_StartBirchRescueNorthW::
+	lockall
+	playbgm MUS_HELP, TRUE
+	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
+	closemessage
+	setobjectxy LOCALID_BIRCH, 0, 15
+	setobjectxy LOCALID_ZIGZAGOON, 0, 16
+	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_EnterSceneNorthW
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunAway1
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
+	waitmovement 0
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunInCircles
+	waitmovement 0
+	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchFaceZigzagoon
+	waitmovement 0
+	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_ROUTE101_STATE, 2
+	releaseall
+	end
+
+Route101_EventScript_StartBirchRescueNorth::
+	lockall
+	playbgm MUS_HELP, TRUE
+	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
+	closemessage
+	setobjectxy LOCALID_BIRCH, 0, 15
+	setobjectxy LOCALID_ZIGZAGOON, 0, 16
+	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_EnterSceneNorth
+	waitmovement 0
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunAway1
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
+	waitmovement 0
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunInCircles
+	waitmovement 0
+	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchFaceZigzagoon
+	waitmovement 0
+	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_ROUTE101_STATE, 2
+	releaseall
+	end
+
+Route101_EventScript_StartBirchRescueEast::
+	lockall
+	playbgm MUS_HELP, TRUE
+	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
+	closemessage
+	setobjectxy LOCALID_BIRCH, 0, 15
+	setobjectxy LOCALID_ZIGZAGOON, 0, 16
+	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_EnterSceneEast
+	waitmovement 0
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunAway1
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChase1
+	waitmovement 0
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonChaseInCircles
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchRunInCircles
+	waitmovement 0
+	applymovement LOCALID_BIRCH, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	applymovement LOCALID_ZIGZAGOON, Route101_Movement_ZigzagoonFaceBirch
+	applymovement LOCALID_BIRCH, Route101_Movement_BirchFaceZigzagoon
+	waitmovement 0
+	msgbox Route101_Text_PleaseHelp, MSGBOX_DEFAULT
+	closemessage
+	setvar VAR_ROUTE101_STATE, 2
+	releaseall
+	end
+
+Route101_EventScript_StartBirchRescueSouth::
 	lockall
 	playbgm MUS_HELP, TRUE
 	msgbox Route101_Text_HelpMe, MSGBOX_DEFAULT
@@ -54,11 +131,11 @@ Route101_EventScript_PreventExitSouth::
 	releaseall
 	end
 
-Route101_EventScript_PreventExitWest::
+Route101_EventScript_PreventExitEast::
 	lockall
 	msgbox Route101_Text_DontLeaveMe, MSGBOX_DEFAULT
 	closemessage
-	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitWest
+	applymovement OBJ_EVENT_ID_PLAYER, Route101_Movement_PreventExitEast
 	waitmovement 0
 	releaseall
 	end
@@ -76,8 +153,8 @@ Route101_Movement_PreventExitSouth:
 	walk_up
 	step_end
 
-Route101_Movement_PreventExitWest:
-	walk_right
+Route101_Movement_PreventExitEast:
+	walk_left
 	step_end
 
 Route101_Movement_PreventExitNorth:
@@ -141,6 +218,37 @@ Route101_Movement_EnterScene:
 	walk_fast_up
 	walk_fast_up
 	walk_fast_up
+	walk_in_place_faster_left
+	step_end
+
+Route101_Movement_EnterSceneNorthW:
+	walk_fast_down
+	walk_fast_down
+	walk_in_place_faster_down
+	step_end
+
+Route101_Movement_EnterSceneNorth:
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_down
+	walk_fast_left
+	walk_in_place_faster_left
+	step_end
+
+Route101_Movement_EnterSceneNEast:
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_down
+	walk_in_place_faster_left
+	step_end
+
+Route101_Movement_EnterSceneEast:
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
+	walk_fast_left
 	walk_in_place_faster_left
 	step_end
 
