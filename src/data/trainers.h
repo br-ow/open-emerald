@@ -1,7 +1,6 @@
 const struct Trainer gTrainers[] = {
     [TRAINER_NONE] =
     {
-        .partyFlags = 0,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_1,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_HIKER,
@@ -612,7 +611,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Rose5),
+        .party = TRAINER_PARTY(sParty_Rose5),
     },
 */
     [TRAINER_DUSTY_1] =
@@ -708,7 +707,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_Dusty5),
+        .party = TRAINER_PARTY(sParty_Dusty5),
     },
 */
     [TRAINER_GABBY_AND_TY_1] =
@@ -888,7 +887,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Lola5),
+        .party = TRAINER_PARTY(sParty_Lola5),
     },
 */
     [TRAINER_RICKY_1] =
@@ -984,7 +983,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_Ricky5),
+        .party = TRAINER_PARTY(sParty_Ricky5),
     },
 */
     [TRAINER_RANDALL] =
@@ -1220,7 +1219,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Wilton5),
+        .party = TRAINER_PARTY(sParty_Wilton5),
     },
 */
     [TRAINER_WARREN] =
@@ -1456,7 +1455,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Brooke5),
+        .party = TRAINER_PARTY(sParty_Brooke5),
     },
 */
     [TRAINER_PATRICIA] =
@@ -1580,7 +1579,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Valerie5),
+        .party = TRAINER_PARTY(sParty_Valerie5),
     },
 */
     [TRAINER_CINDY_1] =
@@ -1704,7 +1703,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_Cindy5),
+        .party = TRAINER_PARTY(sParty_Cindy5),
     },
 
     [TRAINER_CINDY_6] =
@@ -1716,7 +1715,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_CUSTOM_MOVES(sParty_Cindy6),
+        .party = TRAINER_PARTY(sParty_Cindy6),
     },
 */
     [TRAINER_MELISSA] =
@@ -1882,7 +1881,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_Jessica5),
+        .party = TRAINER_PARTY(sParty_Jessica5),
     },
 */
     [TRAINER_WINSTON_1] =
@@ -1978,7 +1977,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_CUSTOM_MOVES(sParty_Winston5),
+        .party = TRAINER_PARTY(sParty_Winston5),
     },
 */
     [TRAINER_STEVE_1] =
@@ -2088,7 +2087,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Steve5),
+        .party = TRAINER_PARTY(sParty_Steve5),
     },
 */
     [TRAINER_LUIS] =
@@ -2477,7 +2476,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Tony5),
+        .party = TRAINER_PARTY(sParty_Tony5),
     },
 */
     [TRAINER_TAKAO] =
@@ -2601,7 +2600,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_Nob5),
+        .party = TRAINER_PARTY(sParty_Nob5),
     },
 */
     [TRAINER_YUJI] =
@@ -2781,7 +2780,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Dalton5),
+        .party = TRAINER_PARTY(sParty_Dalton5),
     },
 */
     [TRAINER_COLE] =
@@ -2919,7 +2918,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Bernie5),
+        .party = TRAINER_PARTY(sParty_Bernie5),
     },
 */
     [TRAINER_DREW] =
@@ -3085,7 +3084,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Ethan5),
+        .party = TRAINER_PARTY(sParty_Ethan5),
     },
 */
     [TRAINER_BRENT] =
@@ -3209,7 +3208,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_Jeffrey5),
+        .party = TRAINER_PARTY(sParty_Jeffrey5),
     },
 */
     [TRAINER_EDWARD] =
@@ -3361,7 +3360,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Cameron5),
+        .party = TRAINER_PARTY(sParty_Cameron5),
     },
 */
     [TRAINER_JACLYN] =
@@ -3513,7 +3512,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Jacki5),
+        .party = TRAINER_PARTY(sParty_Jacki5),
     },
 */
     [TRAINER_WALTER_1] =
@@ -3609,7 +3608,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_Walter5),
+        .party = TRAINER_PARTY(sParty_Walter5),
     },
 */
     [TRAINER_SIDNEY] =
@@ -4769,7 +4768,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Jerry5),
+        .party = TRAINER_PARTY(sParty_Jerry5),
     },
 */
     [TRAINER_KAREN_1] =
@@ -4851,7 +4850,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Karen5),
+        .party = TRAINER_PARTY(sParty_Karen5),
     },
 */
     [TRAINER_KATE_AND_JOY] =
@@ -4933,7 +4932,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = TRUE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_AnnaAndMeg5),
+        .party = TRAINER_PARTY(sParty_AnnaAndMeg5),
     },
 */
     [TRAINER_VICTOR] =
@@ -5029,7 +5028,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_Miguel5),
+        .party = TRAINER_PARTY(sParty_Miguel5),
     },
 */
     [TRAINER_VICTORIA] =
@@ -5139,7 +5138,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_Isabel5),
+        .party = TRAINER_PARTY(sParty_Isabel5),
     },
 */
     [TRAINER_TIMOTHY_1] =
@@ -5207,7 +5206,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_Timothy5),
+        .party = TRAINER_PARTY(sParty_Timothy5),
     },
 */
     [TRAINER_VICKY] =
@@ -5289,7 +5288,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Shelby5),
+        .party = TRAINER_PARTY(sParty_Shelby5),
     },
 */
     [TRAINER_CALVIN_1] =
@@ -5483,7 +5482,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Calvin5),
+        .party = TRAINER_PARTY(sParty_Calvin5),
     },
 */
     [TRAINER_EDDIE] =
@@ -5733,7 +5732,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Elliot5),
+        .party = TRAINER_PARTY(sParty_Elliot5),
     },
 */
     [TRAINER_RONALD] =
@@ -5843,7 +5842,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Benjamin5),
+        .party = TRAINER_PARTY(sParty_Benjamin5),
     },
 */
     [TRAINER_ABIGAIL_1] =
@@ -5925,7 +5924,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Abigail5),
+        .party = TRAINER_PARTY(sParty_Abigail5),
     },
 */
     [TRAINER_DYLAN_1] =
@@ -5993,7 +5992,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Dylan5),
+        .party = TRAINER_PARTY(sParty_Dylan5),
     },
 */
     [TRAINER_MARIA_1] =
@@ -6061,7 +6060,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Maria5),
+        .party = TRAINER_PARTY(sParty_Maria5),
     },
 */
     [TRAINER_CAMDEN] =
@@ -6185,7 +6184,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Isaiah5),
+        .party = TRAINER_PARTY(sParty_Isaiah5),
     },
 */
     [TRAINER_ISOBEL] =
@@ -6309,7 +6308,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Katelyn5),
+        .party = TRAINER_PARTY(sParty_Katelyn5),
     },
 */
     [TRAINER_NICOLAS_1] =
@@ -6377,7 +6376,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_Nicolas5),
+        .party = TRAINER_PARTY(sParty_Nicolas5),
     },
 */
     [TRAINER_AARON] =
@@ -6599,7 +6598,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Robert5),
+        .party = TRAINER_PARTY(sParty_Robert5),
     },
 */
     [TRAINER_ALEX] =
@@ -6765,7 +6764,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = 0,
-        .party = ITEM_CUSTOM_MOVES(sParty_Lao5),
+        .party = TRAINER_PARTY(sParty_Lao5),
     },
 */
     [TRAINER_JOCELYN] =
@@ -6889,7 +6888,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Cyndy5),
+        .party = TRAINER_PARTY(sParty_Cyndy5),
     },
 */
     [TRAINER_MADELINE_1] =
@@ -6985,7 +6984,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_Madeline5),
+        .party = TRAINER_PARTY(sParty_Madeline5),
     },
 */
     [TRAINER_BEVERLY] =
@@ -7375,7 +7374,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Jenny5),
+        .party = TRAINER_PARTY(sParty_Jenny5),
     },
 */
     [TRAINER_HEIDI] =
@@ -7541,7 +7540,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Diana5),
+        .party = TRAINER_PARTY(sParty_Diana5),
     },
 */
     [TRAINER_AMY_AND_LIV_1] =
@@ -7651,7 +7650,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = TRUE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_AmyAndLiv5),
+        .party = TRAINER_PARTY(sParty_AmyAndLiv5),
     },
 
     [TRAINER_AMY_AND_LIV_6] =
@@ -7663,7 +7662,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = TRUE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_AmyAndLiv6),
+        .party = TRAINER_PARTY(sParty_AmyAndLiv6),
     },
 */
     [TRAINER_HUEY] =
@@ -7815,7 +7814,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Ernest5),
+        .party = TRAINER_PARTY(sParty_Ernest5),
     },
 */
     [TRAINER_ELI] =
@@ -8065,7 +8064,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Edwin5),
+        .party = TRAINER_PARTY(sParty_Edwin5),
     },
 */
     [TRAINER_WALLY_VR_1] =
@@ -8427,7 +8426,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Isaac5),
+        .party = TRAINER_PARTY(sParty_Isaac5),
     },
 */
     [TRAINER_LYDIA_1] =
@@ -8523,7 +8522,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Lydia5),
+        .party = TRAINER_PARTY(sParty_Lydia5),
     },
 */
     [TRAINER_JACKSON_1] =
@@ -8619,7 +8618,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Jackson5),
+        .party = TRAINER_PARTY(sParty_Jackson5),
     },
 */
     [TRAINER_CATHERINE_1] =
@@ -8715,7 +8714,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Catherine5),
+        .party = TRAINER_PARTY(sParty_Catherine5),
     },
 */
     [TRAINER_JULIO] =
@@ -9342,7 +9341,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Haley5),
+        .party = TRAINER_PARTY(sParty_Haley5),
     },
 */
     [TRAINER_SALLY] =
@@ -9550,7 +9549,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_James5),
+        .party = TRAINER_PARTY(sParty_James5),
     },
 */
     [TRAINER_BRICE] =
@@ -9744,7 +9743,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Trent5),
+        .party = TRAINER_PARTY(sParty_Trent5),
     },
 */
     [TRAINER_DEZ_AND_LUKE] =
@@ -9840,7 +9839,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = TRUE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_KiraAndDan5),
+        .party = TRAINER_PARTY(sParty_KiraAndDan5),
     },
 */
     [TRAINER_JOHANNA] =
@@ -10034,7 +10033,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_WallyVR5),
+        .party = TRAINER_PARTY(sParty_WallyVR5),
     },
 */
     [TRAINER_BRENDAN_LILYCOVE_MUDKIP] =
@@ -10382,7 +10381,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = TRUE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_CUSTOM_MOVES(sParty_JohnAndJay5),
+        .party = TRAINER_PARTY(sParty_JohnAndJay5),
     },
 */
     [TRAINER_RELI_AND_IAN] =
@@ -10464,7 +10463,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = TRUE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_LilaAndRoy5),
+        .party = TRAINER_PARTY(sParty_LilaAndRoy5),
     },
 */
     [TRAINER_LISA_AND_RAY] =
@@ -12114,7 +12113,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Andres5),
+        .party = TRAINER_PARTY(sParty_Andres5),
     },
 */
     [TRAINER_CORY_2] =
@@ -12168,7 +12167,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Cory5),
+        .party = TRAINER_PARTY(sParty_Cory5),
     },
 */
     [TRAINER_PABLO_2] =
@@ -12222,7 +12221,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Pablo5),
+        .party = TRAINER_PARTY(sParty_Pablo5),
     },
 */
     [TRAINER_KOJI_2] =
@@ -12276,7 +12275,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Koji5),
+        .party = TRAINER_PARTY(sParty_Koji5),
     },
 */
     [TRAINER_CRISTIN_2] =
@@ -12330,7 +12329,7 @@ const struct Trainer gTrainers[] = {
         .items = {ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Cristin5),
+        .party = TRAINER_PARTY(sParty_Cristin5),
     },
 */
     [TRAINER_FERNANDO_2] =
@@ -12384,7 +12383,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Fernando5),
+        .party = TRAINER_PARTY(sParty_Fernando5),
     },
 */
     [TRAINER_SAWYER_2] =
@@ -12438,7 +12437,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Sawyer5),
+        .party = TRAINER_PARTY(sParty_Sawyer5),
     },
 */
     [TRAINER_GABRIELLE_2] =
@@ -12492,7 +12491,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Gabrielle5),
+        .party = TRAINER_PARTY(sParty_Gabrielle5),
     },
 */
     [TRAINER_THALIA_2] =
@@ -12546,7 +12545,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_Thalia5),
+        .party = TRAINER_PARTY(sParty_Thalia5),
     },
 */
     [TRAINER_MARIELA] =
